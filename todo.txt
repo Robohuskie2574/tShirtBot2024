@@ -1,0 +1,3 @@
+Cannon:Configuarable fire time and cooldown
+RGB:Default effect and fire effect. Drive effect?
+Drive:Fix bad turn in SW?
