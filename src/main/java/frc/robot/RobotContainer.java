@@ -31,6 +31,7 @@ public class RobotContainer {
     private final Trigger Cannon2 = new Trigger(new JoystickButton(ControlJoystick,3)).and(SafetyButton);
     private final Trigger Cannon3 = new Trigger(new JoystickButton(ControlJoystick,4)).and(SafetyButton);
     private final Trigger Cannon4 = new Trigger(new JoystickButton(ControlJoystick,6)).and(SafetyButton);
+    private final RGBControl RobotRGBControl = new RGBControl();
 
     public RobotContainer() {
         ConfigTab=Shuffleboard.getTab("Config");
@@ -42,6 +43,7 @@ public class RobotContainer {
         RobotCannon = new Cannon(FireTimeSelector);
         configureBindings();
         RobotDriveTrainSubsystem.setDefaultCommand(new DriveTeleOp(RobotDriveTrainSubsystem));
+        RobotRGBControl.setDefaultCommand(new RGBRunning(RobotRGBControl));
     }
 
     private void configureBindings() {
