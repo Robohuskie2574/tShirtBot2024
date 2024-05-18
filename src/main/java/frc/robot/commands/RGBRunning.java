@@ -20,7 +20,9 @@ public class RGBRunning extends Command {
     @Override
     public void execute(){
         for (int i = 0; i < 108; i++) {
-            RGBStrip.Set(i,0,0,255);
+            int gMode = (24*i)%512;
+            gMode = gMode>255?511-gMode:gMode;
+            RGBStrip.Set(i,0,(10*i)%256,255);
         }
     }
 

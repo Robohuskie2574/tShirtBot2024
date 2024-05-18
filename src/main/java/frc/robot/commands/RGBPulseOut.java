@@ -6,12 +6,17 @@ import frc.robot.subsystems.RGBControl;
 
 public class RGBPulseOut extends Command {
     RGBControl RGBStrip;
-    Timer Time;
-    float TBtwn = 0.1;
+    Timer Time = new Timer();
+    double TBtwn = 10;
     int middle = 50;
+    Boolean AutoEnd; // does nothing
+    Boolean ReturnMode;
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    public RGBPulseOut(RGBControl RGBStrip){
+    public RGBPulseOut(RGBControl RGBStrip,double Speed,Boolean AutoEnd,Boolean ReturnMode){
         this.RGBStrip=RGBStrip;
+        this.TBtwn=Speed;
+        this.AutoEnd = AutoEnd;
+        this.ReturnMode=ReturnMode;
         addRequirements(this.RGBStrip);
     }
 
@@ -29,9 +34,9 @@ public class RGBPulseOut extends Command {
     @Override
     public void execute(){
         for (int i = 0; i < 108; i++) {
-            //int rb=255*(((int)(Time.get()*TBtwn)-Math.abs(middle-i))>0);
-            int rb=0;
-            RGBStrip.Set(i,0,0,255);
+            Boolean thisdiff=((Math.abs(middle-i))<Time.get()*TBtwn);
+            thisdiff=ReturnMode?!thisdiff:thisdiff;
+            RGBStrip.Set(i,thisdiff?255:0,0,thisdiff?0:255);
         }
     }
 
@@ -40,6 +45,6 @@ public class RGBPulseOut extends Command {
 
     @Override
     public boolean isFinished() {
-        return (Time.get()*TBtwn)>108;
+        return AutoEnd?(int)(Time.get()*TBtwn)>108:false;
     }
 }
