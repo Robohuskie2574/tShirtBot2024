@@ -43,7 +43,7 @@ public class RobotContainer {
         RobotCannon = new Cannon(FireTimeSelector);
         configureBindings();
         RobotDriveTrainSubsystem.setDefaultCommand(new DriveTeleOp(RobotDriveTrainSubsystem));
-        RobotRGBControl.setDefaultCommand(new RGBRunning(RobotRGBControl));
+        RobotRGBControl.setDefaultCommand(new RGBMgr(RobotRGBControl));
     }
 
     private void configureBindings() {
@@ -51,8 +51,6 @@ public class RobotContainer {
         Cannon2.onTrue(new CannonControl(RobotCannon,1));
         Cannon3.onTrue(new CannonControl(RobotCannon,2));
         Cannon4.onTrue(new CannonControl(RobotCannon,3));
-        SafetyButton.whileTrue(new RGBPulseOut(RobotRGBControl,42,false,false));
-        SafetyButton.onFalse(new RGBPulseOut(RobotRGBControl,42,true,true));
     }
 
     public Command getAutonomousCommand() {
