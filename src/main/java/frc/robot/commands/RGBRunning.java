@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.RGBControl;
+import frc.robot.Constants.*;
 
 public class RGBRunning extends Command {
     RGBControl RGBStrip;
@@ -19,10 +20,10 @@ public class RGBRunning extends Command {
 
     @Override
     public void execute(){
-        for (int i = 0; i < 108; i++) {
+        for (int i = 0; i < frc.robot.Constants.LEDlen; i++) {
             int gMode = (24*i)%512;
             gMode = gMode>255?511-gMode:gMode;
-            RGBStrip.Set(i,0,(10*i)%256,255);
+            RGBStrip.Set(i,gMode,gMode,255);
         }
     }
 

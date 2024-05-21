@@ -33,7 +33,7 @@ public class RGBPulseOut extends Command {
 
     @Override
     public void execute(){
-        for (int i = 0; i < 108; i++) {
+        for (int i = 0; i < frc.robot.Constants.LEDlen; i++) {
             Boolean thisdiff=((Math.abs(middle-i))<Time.get()*TBtwn);
             thisdiff=ReturnMode?!thisdiff:thisdiff;
             RGBStrip.Set(i,thisdiff?255:0,0,thisdiff?0:255);
@@ -45,6 +45,6 @@ public class RGBPulseOut extends Command {
 
     @Override
     public boolean isFinished() {
-        return AutoEnd?(int)(Time.get()*TBtwn)>108:false;
+        return AutoEnd?(int)(Time.get()*TBtwn)>frc.robot.Constants.LEDlen:false;
     }
 }
