@@ -19,7 +19,7 @@ public class DriveTeleOp extends Command {
     private Timer ButtonReleaseTimer = new Timer();
     public DriveTeleOp(DriveTrainSubsystem InputDriveTrain) {
         FineControlModeSpeedSelector = ConfigTab
-        .add("Fine Control Mode Speed Multiplier",1)
+        .add("Fine Control Mode Speed Multiplier",.75)
         .withWidget(BuiltInWidgets.kNumberSlider)
         .withProperties(Map.of("min", 0, "max", 1))
         .getEntry();
@@ -42,6 +42,7 @@ public class DriveTeleOp extends Command {
         if(SlowDrive){
             ButtonReleaseTimer.restart();
             mul = SlowSpeed;
+            System.out.println(mul);
         }else{
             mul=Math.min(SlowSpeed+ButtonReleaseTimer.get()*RampRate,1);
         }
